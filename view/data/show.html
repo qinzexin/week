@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 基本的表格</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form action="read" method="post">
+    <input type="text" name="name">
+    <input type="submit">
+</form>
+
+<table class="table">
+    <caption></caption>
+    <thead>
+    <tr>
+        <th><input type="checkbox" class="check_all"></th>
+        <th>ID</th>
+        <th>标题</th>
+        <th>描述</th>
+        <th>文章LOGO</th>
+        <th>文章内容</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $data as $val}
+    <tr>
+        <td><input type="checkbox" class="row_check"></td>
+        <td>{$val.id}</td>
+        <td>{$val.name}</td>
+        <td>{$val.desc}</td>
+        <td><img src="{$val.img}" alt="" style="width: 60px; height: 60px;"></td>
+        <td>{$val.text}</td>
+        <td>
+            <a href="delete?id=[{$val.id}]">删除</a>
+        </td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+<div>
+    <ul>
+        {volist name='list' id='user'}
+        <li> {$user.nickname}</li>
+        {/volist}
+    </ul>
+</div>
+{$data->render()}
+</body>
+</html>
+<script>
+    $(function () {
+        $(".check_all").click(function () {
+            $(".row_check").prop("checked",$(this).prop("checked"));
+        })
+        $("a").click(function () {
+            alert('确认删除')
+        })
+    });
+
+</script>
